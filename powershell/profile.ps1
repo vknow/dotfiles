@@ -218,3 +218,14 @@ Set-PSReadLineOption -CommandValidationHandler {
         }
     }
 }
+
+# Feed the output of fd into fzf
+$env:FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border top'
+
+
+# shortcut for fuzzy find
+function ff {
+  nvim $(fzf --preview 'bat --style=numbers --color=always {}' --preview-window '~3')
+}
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
+
